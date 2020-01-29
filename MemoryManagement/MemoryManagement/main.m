@@ -9,20 +9,10 @@
 #import <UIKit/UIKit.h>
 #import "AppDelegate.h"
 
+// Swap main() functions for MRC
 int main(int argc, char * argv[]) {
-    NSString * appDelegateClassName;
     @autoreleasepool {
         // Setup code that might create autoreleased objects goes here.
-        appDelegateClassName = NSStringFromClass([AppDelegate class]);
+        return UIApplicationMain(argc, argv, nil, NSStringFromClass([AppDelegate class]));
     }
-    return UIApplicationMain(argc, argv, nil, appDelegateClassName);
 }
-
-// TODO: Swap main() functions for MRC
-
-//int main(int argc, char * argv[]) {
-//    @autoreleasepool {
-//        // Setup code that might create autoreleased objects goes here.
-//        return UIApplicationMain(argc, argv, nil, NSStringFromClass([AppDelegate class]));
-//    }
-//}
