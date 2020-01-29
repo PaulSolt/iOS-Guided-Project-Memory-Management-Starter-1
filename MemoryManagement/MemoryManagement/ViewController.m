@@ -55,12 +55,60 @@
 //    [self.people removeObject:jim]; // jim: 1 (array calls release when removing an object)
     
 
-    
-    Car *honda = [[Car alloc] initWithMake:@"Civic"]; // honda: 1
+    Car *honda = [Car carWithMake:@"Civic"];
+//    Car *honda = [[Car alloc] initWithMake:@"Civic"]; // honda: 1
     Person *sarah = [[Person alloc] initWithCar:honda]; // honda: 2, sarah: 1
-    [honda release]; // honda: 1, Transfering ownership
+//    [honda release]; // honda: 1, Transfering ownership
+
+
+//    sarah.car = honda; // Potential crash if not set correctly
+    
+    
     
     [sarah release]; // sarah: 0, honda: 0
+    
+    NSString *name = [NSString stringWithFormat:@"%@ %@", @"John", @"Miller"];
+    // Autoreleased? or not (YES, no it's not)
+    // YES
+    
+    NSDate *today = [NSDate date];
+    // YES
+    
+    NSDate *now = [NSDate new];
+    // NO
+    
+    NSDate *tomorrow2 = [NSDate dateWithTimeIntervalSinceNow:60*60*24];
+    // YES
+    
+    NSDate *nextTomorrow = [tomorrow2 copy]; // retain: 1
+    // NO
+    
+    NSArray *words = [@"This sentence is the bomb" componentsSeparatedByString:@" "];
+    // YES
+    
+    NSString *idea = [[NSString alloc] initWithString:@"Hello Ideas"];
+    // NO (rule 3)
+    
+    Car *redCar = [Car carWithMake:@"Civic"];
+    // YES
+    
+    NSString *idea2 = [[[NSString alloc] initWithString:@"Hello Ideas"] autorelease];
+    // YES
+    
+    NSString *idea3 = [[NSString alloc] initWithString:@"Hello Ideas"];
+    // NO
+    [idea3 autorelease];
+    // YES
+    
+    [now release];
+    [nextTomorrow release];
+    [idea release];
+    
+    
+    
+    
+    
+    
 } // end of scope for the method
 
 // Sample NSMutableArray addObject implementation

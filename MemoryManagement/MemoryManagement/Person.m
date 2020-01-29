@@ -34,8 +34,10 @@
 // TODO: Implement setCar with MRC
 - (void)setCar:(Car *)car {
     // What do I need to do here?
-    [_car release];
-    _car = [car retain];
+    if (car != _car) { // Without it crashes if we do same assignment
+        [_car release];
+        _car = [car retain];
+    }
 }
 
 @end
