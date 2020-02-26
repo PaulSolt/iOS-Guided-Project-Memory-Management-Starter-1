@@ -16,5 +16,11 @@
 
 // TODO: Create an autoreleased class method to create a Car
 
+// How do you a create a class method?
+
+// + = class method  (Class = blueprint for a building)
+// - = instance method (Object = building #1 on 22nd street)
+
++ (instancetype)carWithMake:(NSString *)make;
 
 @end
