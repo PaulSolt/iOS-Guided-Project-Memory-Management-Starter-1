@@ -16,7 +16,7 @@
     self = [super init];
     if (self) {
         NSLog(@"-[Car init]: %@", make);
-        _make = [make copy];
+        _make = [make copy]; // retain: +1
     }
     return self;
 }
@@ -27,14 +27,17 @@
 - (void)dealloc
 {
     NSLog(@"-[Car dealloc]: %@", self);
-    // TODO: Implement dealloc with MRC
+    // Implement dealloc with MRC
+    [_make release]; // retain: -1
+    _make = nil;
+    
+    [super dealloc];
 }
 
 - (NSString *)description
 {
-    // TODO: Implement a standard autoreleasing method.
-    NSString *description = [[NSString alloc] initWithFormat:@"Car: %@", self.make];
-    return description;
+    // Implement a standard autoreleasing method.
+    return [[[NSString alloc] initWithFormat:@"Car: %@", self.make] autorelease];
 }
 
 @end
