@@ -23,6 +23,9 @@
 
 // TODO: Implement autoreleased class car method
 
++ (instancetype)carWithMake:(NSString *)make {
+    return [[[Car alloc] initWithMake:make] autorelease];
+}
 
 - (void)dealloc
 {

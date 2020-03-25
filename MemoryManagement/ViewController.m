@@ -83,6 +83,44 @@
     [person release]; // hummer: 0
     
     // Do I have a memory leak?
+    
+    
+    
+    // Is the object autoreleased? Why?
+
+    NSString *name2 = [NSString stringWithFormat:@"%@ %@", @"John", @"Miller"];
+    // yes
+    
+    NSDate *today = [NSDate date];
+    // yes
+    
+    NSDate *now = [NSDate new];
+    // no
+    
+    NSDate *tomorrow2 = [NSDate dateWithTimeIntervalSinceNow:60*60*24];
+    // yes
+    
+    NSDate *nextTomorrow = [tomorrow2 copy];
+    // no
+    
+    NSArray *words = [@"This sentence is the bomb" componentsSeparatedByString:@" "];
+    // yes
+    
+    NSString *idea = [[NSString alloc] initWithString:@"Hello Ideas"];
+    // no
+    
+    Car *blueCar = [[Car alloc] initWithMake:@"Forester"]; // retain: 1
+    Car *redCar = [Car carWithMake:@"Forester"]; // autorelease
+    // yes
+    
+    NSString *idea2 = [[[NSString alloc] initWithString:@"Hello Ideas"] autorelease];
+    // yes
+    
+    NSString *idea3 = [[NSString alloc] initWithString:@"Hello Ideas"];
+    // no
+    [idea3 autorelease];
+    // yes
+    
 }
 
 
