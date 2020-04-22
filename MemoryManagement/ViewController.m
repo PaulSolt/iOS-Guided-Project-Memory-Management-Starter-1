@@ -79,6 +79,41 @@
     bob = nil;
     
     Car *accord = [Car carWithMake:@"accord"]; // autoreleased
+    
+    // Rule: alloc/init, new, copy, mutableCopy -> own the memory and have to release it
+    
+    // IS this object autoreleased?
+    NSString *name2 = [NSString stringWithFormat:@"%@ %@", @"John", @"Miller"];
+    // Yes
+    
+    NSDate *today = [NSDate date];
+    // YES
+    
+    NSDate *now = [NSDate new]; // alloc/init
+    // NO
+    
+    NSDate *tomorrow2 = [NSDate dateWithTimeIntervalSinceNow:60*60*24];
+    // YES
+    NSDate *nextTomorrow = [tomorrow2 copy]; // +1
+    // NO
+    
+    NSArray *words = [@"This sentence is the bomb" componentsSeparatedByString:@" "];
+    // YES
+    
+    NSString *idea = [[NSString alloc] initWithString:@"Hello Ideas"];
+    // NO
+    
+    Car *redCar = [Car carWithMake:@"RedCar"];
+    // YES
+    
+    NSString *idea2 = [[[NSString alloc] initWithString:@"Hello Ideas"] autorelease];
+    // YES
+    
+    NSString *idea3 = [[NSString alloc] initWithString:@"Hello Ideas"];
+    // NO
+    [idea3 autorelease];
+    // YES
+    
 } // end of scope (put things in properties to hold onto them, or release them before we get here)
 
 
