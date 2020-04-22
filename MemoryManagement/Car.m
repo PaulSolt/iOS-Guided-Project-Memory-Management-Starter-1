@@ -21,7 +21,10 @@
     return self;
 }
 
-// TODO: Implement autoreleased class car method
+// Create an autoreleased class method to create a Car
++ (instancetype)carWithMake:(NSString *)make {
+    return [[[Car alloc] initWithMake:make] autorelease];
+}
 
 
 - (void)dealloc {
@@ -35,7 +38,6 @@
 
 - (NSString *)description
 {
-    // TODO: Implement a standard autoreleasing method.
     NSString *description = [NSString stringWithFormat:@"Car: %@", self.make]; // autoreleased object
 //    NSString *description = [[[NSString alloc] initWithFormat:@"Car: %@", self.make] autorelease];
 

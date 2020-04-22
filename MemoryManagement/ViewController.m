@@ -73,10 +73,12 @@
     bob.car = forester; // 1
     
     
+    
     // Cleanup memory
     [bob release]; // bob: 0, forester: 0
     bob = nil;
     
+    Car *accord = [Car carWithMake:@"accord"]; // autoreleased
 } // end of scope (put things in properties to hold onto them, or release them before we get here)
 
 
