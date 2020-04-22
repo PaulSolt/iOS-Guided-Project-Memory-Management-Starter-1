@@ -64,8 +64,15 @@
     Person *bob = [[Person alloc] initWithCar:civic]; // bob: 1, civic: 1
     // [civic release]; // other option to transfer ownership -> forget and it's a memory leak
     
-    bob.car = [[[Car alloc] initWithMake:@"Forester"] autorelease]; // forester: 1, civic: 0
+    //bob.car = [[[Car alloc] initWithMake:@"Forester"] autorelease]; // forester: 1, civic: 0
 
+    Car *forester = [[Car alloc] initWithMake:@"Forester"]; // 1
+    bob.car = forester; // 2
+    [forester release]; // 1
+
+    bob.car = forester; // 1
+    
+    
     // Cleanup memory
     [bob release]; // bob: 0, forester: 0
     bob = nil;

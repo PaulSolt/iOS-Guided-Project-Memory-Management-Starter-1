@@ -23,7 +23,6 @@
 }
 
 - (void)dealloc {
-    // TODO: Implement dealloc with MRC (order is important)
     NSLog(@"-[Person dealloc]: %@", _car);
     [_car release];
     _car = nil;
@@ -31,10 +30,12 @@
     [super dealloc];
 }
 
-// TODO: Implement setCar with MRC
+// Implement setCar with MRC
 - (void)setCar:(Car *)car {
-    [_car release];         // -1 retain on previous value (if it existed)
-    _car = [car retain];    // +1 retain
+    if (_car != car) { // prevents memory bug if self assignment
+        [_car release];         // -1 retain on previous value (if it existed)
+        _car = [car retain];    // +1 retain
+    }
 }
 
 @end
