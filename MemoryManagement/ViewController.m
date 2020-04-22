@@ -58,9 +58,17 @@
     colors = nil;
     
     
+    // Car + Person -> ownership
+
+    Car *civic = [[[Car alloc] initWithMake:@"Civic"] autorelease]; // civic: ~1
+    Person *bob = [[Person alloc] initWithCar:civic]; // bob: 1, civic: 1
+    // [civic release]; // other option to transfer ownership -> forget and it's a memory leak
     
-    
-    
+    bob.car = [[[Car alloc] initWithMake:@"Forester"] autorelease]; // forester: 1, civic: 0
+
+    // Cleanup memory
+    [bob release]; // bob: 0, forester: 0
+    bob = nil;
     
 } // end of scope (put things in properties to hold onto them, or release them before we get here)
 

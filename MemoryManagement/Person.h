@@ -12,9 +12,13 @@
 
 @interface Person : NSObject
 
-// TODO: Establish ownership for the car
-@property (nonatomic) Car *car;
+// Establish ownership for the car
 
-- (instancetype)initWithCar:(Car *)car;
+// assign*
+// MRC: retain, copy: +1 retain count
+
+@property (nonatomic, retain) Car *car; // +1 retain count
+
+- (instancetype)initWithCar:(Car *)car; // +1 retain count
 
 @end
