@@ -72,13 +72,21 @@
     // happen
     
     
-    Car *honda = [[[Car alloc] initWithMake:@"Civic"] autorelease]; // honda: 0
+    Car *honda = [[Car alloc] initWithMake:@"Civic"]; // honda: 1
     
-    Person *person = [[Person alloc] initWithCar:honda]; // person: 1
+    Person *person = [[Person alloc] initWithCar:honda]; // person: 1, honda: 2
+    [honda release]; // honda: 1
+    
+    person.car = honda;
+    
     
     // person.car will retain
     // alloc/init will retain
-    person.car = [[[Car alloc] initWithMake:@"Forester"] autorelease]; // unamedCar: 0 + 1
+    Car *subaru = [[Car alloc] initWithMake:@"Forester"]; // 1
+    person.car = subaru; // 2
+    [subaru release]; // 1
+    
+    person.car = subaru; // 3
     
     // cleanup person now, or I need to hold onto it
     //self.person = person; // -> need to release in the dealloc

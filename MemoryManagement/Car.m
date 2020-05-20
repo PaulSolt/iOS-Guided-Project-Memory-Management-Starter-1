@@ -27,7 +27,8 @@
 - (void)dealloc
 {
     NSLog(@"-[Car dealloc]: %@", self);
-    // TODO: Implement dealloc with MRC
+    
+    [super dealloc];
 }
 
 - (NSString *)description
