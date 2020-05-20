@@ -59,6 +59,10 @@
     [colors addObject:favoriteColor]; // favoriteColor: 2 (addObject +1)
     [favoriteColor release]; // favoriteColor: 1 -> transfering object ownership to the array
     
+    NSString *color2 = [[[NSString alloc] initWithString:@"Red"] autorelease];
+    [colors addObject:color2];
+    
+    
     // How do I clean it up?
     [colors release]; // colors: 0 -> automatic cleanup of memory (other variables can now use this space)
     // favoriteColor: 0
@@ -66,6 +70,21 @@
 
     // using colors after setting it to nil is a no-op and will be predictable ... without it ... anything can
     // happen
+    
+    
+    Car *honda = [[[Car alloc] initWithMake:@"Civic"] autorelease]; // honda: 0
+    
+    Person *person = [[Person alloc] initWithCar:honda]; // person: 1
+    
+    // person.car will retain
+    // alloc/init will retain
+    person.car = [[[Car alloc] initWithMake:@"Forester"] autorelease]; // unamedCar: 0 + 1
+    
+    // cleanup person now, or I need to hold onto it
+    //self.person = person; // -> need to release in the dealloc
+    
+    [person release]; // person: 0
+    person = nil; // prevents future issues (protects my future self)
 }
 
 
