@@ -90,9 +90,9 @@
 }
 
 - (void)dealloc {
-    [_name release];
     
     // Only in MRC do you call super dealloc
+    [_name release];
     [super dealloc];
 }
 
