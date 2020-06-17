@@ -80,6 +80,44 @@
     [favoriteColor release];
     favoriteColor = nil; // protect my future self from misusing this dangling pointer (now it's nil)
     
+    // Swift uses ARC: Automatic Reference Counting
+    
+    // Is the object autoreleased? Why?
+
+    NSString *name2 = [NSString stringWithFormat:@"%@ %@", @"John", @"Miller"];
+    // is alloc/init, new, copy, mutable? -> not autoreleased, you own it
+    // otherwise it is autoreleased
+    // YES autoreleased
+
+    NSDate *today = [NSDate date];
+    // YES
+    NSDate *now = [NSDate new];
+    // NO not autoreleased
+
+    NSDate *tomorrow2 = [NSDate dateWithTimeIntervalSinceNow:60*60*24];
+    // YES
+    NSDate *nextTomorrow = [tomorrow2 copy];
+    // NO (copy)
+
+    NSArray *words = [@"This sentence is the bomb" componentsSeparatedByString:@" "];
+    // YES
+
+    NSString *idea = [[NSString alloc] initWithString:@"Hello Ideas"];
+    // NO
+    Car *redCar = [Car car];
+    // YES
+
+    NSString *idea2 = [[[NSString alloc] initWithString:@"Hello Ideas"] autorelease];
+    // YES
+
+    NSString *idea3 = [[NSString alloc] initWithString:@"Hello Ideas"];
+    // NO
+    [idea3 autorelease];
+    // YES
+
+    [now release];
+    now = nil;
+    // Tight for loop - memory pressure
     
 } // end of scope, we lose the name reference
 
